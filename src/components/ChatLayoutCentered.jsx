@@ -151,12 +151,6 @@ export default function ChatLayoutCentered({
         </div>
       </div>
 
-      {/* Decorative Footer */}
-      <div className="centered-footer">
-        <span className="material-symbols-outlined">eco</span>
-        <span className="material-symbols-outlined">filter_vintage</span>
-        <span className="material-symbols-outlined">park</span>
-      </div>
     </div>
   );
 }
