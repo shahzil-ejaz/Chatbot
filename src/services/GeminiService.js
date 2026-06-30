@@ -1,11 +1,7 @@
-/**
- * Gemini API Service for client-side execution with embedded key rotation.
- */
-
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
 
-// Load API Keys from environment variable (comma-separated list)
-const keysString = import.meta.env.VITE_GEMINI_API_KEY || '';
+// Load API Keys from environment variable (comma-separated list), stripping any wrapper quotes
+const keysString = (import.meta.env.VITE_GEMINI_API_KEY || '').replace(/^["']|["']$/g, '');
 const EMBEDDED_API_KEYS = keysString ? keysString.split(',').map(k => k.trim()) : [];
 
 let currentKeyIndex = 0;
@@ -38,18 +34,11 @@ export async function generateChatResponse(history, systemInstruction) {
     console.log(`Attempting API call using Key Index ${currentKeyIndex}`);
 
     try {
-      const isApiKey = apiKey.startsWith('AIzaSy');
-      const url = isApiKey ? `${GEMINI_API_URL}?key=${apiKey}` : GEMINI_API_URL;
-      const headers = {
-        'Content-Type': 'application/json',
-      };
-      if (!isApiKey) {
-        headers['Authorization'] = `Bearer ${apiKey}`;
-      }
-
-      const response = await fetch(url, {
+      const response = await fetch(`${GEMINI_API_URL}?key=${apiKey}`, {
         method: 'POST',
-        headers,
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(payload),
       });
 
