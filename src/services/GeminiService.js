@@ -38,11 +38,18 @@ export async function generateChatResponse(history, systemInstruction) {
     console.log(`Attempting API call using Key Index ${currentKeyIndex}`);
 
     try {
-      const response = await fetch(`${GEMINI_API_URL}?key=${apiKey}`, {
+      const isApiKey = apiKey.startsWith('AIzaSy');
+      const url = isApiKey ? `${GEMINI_API_URL}?key=${apiKey}` : GEMINI_API_URL;
+      const headers = {
+        'Content-Type': 'application/json',
+      };
+      if (!isApiKey) {
+        headers['Authorization'] = `Bearer ${apiKey}`;
+      }
+
+      const response = await fetch(url, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers,
         body: JSON.stringify(payload),
       });
 
