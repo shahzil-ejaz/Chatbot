@@ -71,7 +71,7 @@ export async function generateChatResponse(history, systemInstruction) {
         const errorMsg = data?.error?.message || `Status ${response.status}`;
         console.warn(`Key Index ${currentKeyIndex} failed: ${errorMsg}. Rotating to next key.`);
         lastError = new Error(errorMsg);
-        
+
         currentKeyIndex = (currentKeyIndex + 1) % EMBEDDED_API_KEYS.length;
         continue;
       }
