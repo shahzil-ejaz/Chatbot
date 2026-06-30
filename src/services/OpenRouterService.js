@@ -8,7 +8,7 @@ const OPENROUTER_API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 const keysString = (import.meta.env.VITE_OPENROUTER_API_KEY || '').replace(/^["']|["']$/g, '');
 const EMBEDDED_API_KEYS = keysString ? keysString.split(',').map(k => k.trim()) : [];
 
-const modelName = import.meta.env.VITE_OPENROUTER_MODEL || 'nvidia/nemotron-3.5-content-safety:free';
+const modelName = import.meta.env.VITE_OPENROUTER_MODEL || 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free';
 
 let currentKeyIndex = 0;
 
