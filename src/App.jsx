@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ChatLayoutCentered from './components/ChatLayoutCentered';
-import { generateChatResponse } from './services/GeminiService';
+import { generateChatResponse } from './services/OpenRouterService';
 
 const SYSTEM_INSTRUCTION = `You are a calm, intelligent, and unobtrusive assistant. 
 Your goal is to help the user organize, clarify, and refine their thoughts or projects. 
